@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+<head> 
+    <title>Weather</title> 
+    <meta name="viewport" content="width=device-width" initial-scale="1" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link id = "format" rel="stylesheet" href="{% static 'css/2.css' %}" type="text/css">
+    <script src = "{% static 'js/site.js'%}"></script>
+</head>
+    <body> 
+        <h1>Weather station</h1>
+        <ul type="None" align="center" >
+            <li >Temperature<br><span id = "temp"></span> C </li>
+            <li>Humidity<br><span id = "hum" ></span> %</li>
+        </ul>  
+    </body>
+</html>

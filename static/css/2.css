@@ -1,0 +1,30 @@
+
+p {
+  padding-left: 20px;
+    }
+
+li {
+    color: #0000FF;
+    font-size: 400%;
+    font-family: western wonderment, sans-serif;
+    top: 20%; 
+    text-align: left;
+    margin-right: 10%;
+}
+
+body {
+        background-image: url("/static/img/5.jpg");
+        background-size: 100%;
+        background-attachment: fixed;
+       }
+
+h1 {
+  color: #0000FF;
+  font-size: 600%;
+  font-family: vanilla whale , sans-serif;
+  text-align: left;
+    }
+
+span{
+    font-size: 100pt
+}
