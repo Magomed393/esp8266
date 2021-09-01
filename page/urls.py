@@ -2,8 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [path('',views.index),
-               path('weather/',views.get_temp),
-               path('stream/',views.stream),
+               path('weather/',views.sensor_readings),
+               path('temp/',views.stream_temp),
+               path('hum/',views.stream_hum),
                path('name/',views.get_name),
                ]
 
