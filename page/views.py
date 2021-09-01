@@ -55,12 +55,13 @@ class DB():
         data = self.cursor.fetchone()
         return print(data)
 
+temp_list = []
 
 def stream(request):
     def event_stream():
         while True:
-            my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            for i in my_list:
+            #my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            for i in temp_list:
                 time.sleep(1)
                 yield 'data: %s\n\n' % i
                 # создал генератор который отправляет данные на Web страничку которая через js прослушивает вьюшку
@@ -70,15 +71,13 @@ def stream(request):
 
 def index(request):
     if request.method == 'GET':
-        print(6666)
-    # return render(request, r'D:\prog\project\templates\site.html')
+        return render(request, r'D:\prog\project\templates\site.html')
 
 
 class NameForm(forms.Form):
     name = forms.CharField(label='Имя', max_length=100)
     surname = forms.CharField(label='Фамилия', max_length=100)
     gender = forms.ChoiceField(label='Пол', choices=[('man', 'М'), ('woman', 'Ж')])
-
 
 def get_name(request):
     if request.method == 'POST':
@@ -106,10 +105,14 @@ def get_name1(request):
         # в переменные окружения, т.е. они становятся аргументами объекта request
         # request.POST возвращает QueryDict - словарь тела запроса (в которой передается форма)
         # где занчение предствалено списком
-        s = x.items()
+        #s = x.items()
         # возвращает генератор
-        print('Влажность {}'.format(x.get('hum')))
-        print('Температура {}'.format(x.get('temp')))
+        #print('Влажность {}'.format(x.get('hum')))
+        #print('Температура {}'.format(x.get('temp')))
+        temp = x.get('temp')
+        global temp_list
+        temp_list.append(temp)
+        print(temp_list)
         #for i in range(len(x)):
          #   print(next(s))
             # итерируется по генератору и выдает значения ключ и значения в виде tuple
@@ -118,3 +121,13 @@ def get_name1(request):
         return HttpResponse(None)
     #else:
      #   return render(request, 'name.html')
+
+def get_temp(request):
+    if request.method == 'GET':
+        request.encoding = 'UTF-8'
+        print(request.encoding)
+        x = request.GET.copy()
+        temp = x.get('temp')
+        global temp_list
+        temp_list.append(temp)
+        return HttpResponse(None)
