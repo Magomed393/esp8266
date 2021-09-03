@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 # import re
 import django
 from time import sleep
@@ -14,6 +14,7 @@ from django.shortcuts import render
 import datetime
 import time
 from django.http import StreamingHttpResponse
+import requests as rqs
 
 
 class DB():
@@ -55,8 +56,6 @@ class DB():
         data = self.cursor.fetchone()
         return print(data)
 
-temp_list = []
-temp_hum = []
 
 def index(request):
     if request.method == 'GET':
@@ -68,12 +67,14 @@ class NameForm(forms.Form):
     surname = forms.CharField(label='Фамилия', max_length=100)
     gender = forms.ChoiceField(label='Пол', choices=[('man', 'М'), ('woman', 'Ж')])
 
+my_db = DB()
+
 def get_name(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            my_db = DB()
+            global my_db
             my_db.insert_table(form=form)
             b = my_db.select_data()
             # return HttpResponseRedirect('https://vk.com')
@@ -146,3 +147,9 @@ def stream_hum(request):
                     # создал генератор который отправляет данные на Web страничку которая через js прослушивает вьюшку
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+def esp(requests):
+    rqs.get('http://192.168.43.91:5553?a=1')
+
+
+

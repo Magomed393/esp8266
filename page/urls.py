@@ -6,6 +6,7 @@ urlpatterns = [path('',views.index),
                path('temp/',views.stream_temp),
                path('hum/',views.stream_hum),
                path('name/',views.get_name),
+               path('esp/',views.esp),
                ]
 
 

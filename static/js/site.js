@@ -4,7 +4,7 @@ source.addEventListener('message', function(e) {
 // Пришли какие-то данные
 $('#temp').text(e.data);
 var i = document.getElementById('format')
-if (e.data<'5') { i.href="static/css/2.css";}
+if (e.data<25) { i.href="static/css/2.css";}
 	else {i.href="static/css/1.css";}
             },false);
             
