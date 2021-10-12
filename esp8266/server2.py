@@ -1,11 +1,10 @@
-
 from micro import MicroPyServer
 import esp
 import network
 from machine import Pin
 
-wlan_id = "Sergeev"
-wlan_pass = "25051991"
+wlan_id = "MTS_Router_008720"
+wlan_pass = "72826409"
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)

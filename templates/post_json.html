@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<form id ='form'>
+   {% csrf_token %}
+    <label for="Name">Name</label> <input name ="name" type="text"> 
+	<br>
+	<label for="Surname">Surname</label> <input name ="surname" type="text"> 
+	<br>
+    <label for="Gender">Gender</label> 
+    <select name ='Choise'>
+        <option>M</option>
+        <option>W</option>
+    </select>
+    <br>
+    <input id = 'b' type="button" value="Submit">
+<!--    <input  type="submit" value="Submit">-->
+    <script type="text/javascript" src=" https://code.jquery.com/jquery-1.11.2.js ">
+    </script>
+    <script>        
+        $('#b').click(function() {
+            var results = {};
+            var str = $('form').serializeArray();
+            $.each(str, function(i,f){results[f.name] = f.value});
+            //console.log(results);
+            var jresult = JSON.stringify(results);
+//            console.log(jresult);
+            var url = "http://127.0.0.1:8000/name_json/";
+            var request =new XMLHttpRequest();
+            request.open("POST", url, true);
+            request.setRequestHeader('Content-Type', 'application/json'); 
+//            var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+////          console.log(csrftoken);
+            cookiecsrftoken = document.cookie.match(/csrftoken=([\w-]+)/)
+            csrfCookie = cookiecsrftoken[1];
+            console.log(csrfCookie);
+            request.setRequestHeader("X-CSRFToken", csrfCookie);
+            console.log(jresult)
+            request.send(jresult);
+    });
+       
+</script>
+    </form>
+</body>
+</html>

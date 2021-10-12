@@ -1,21 +1,31 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
-<form action="/name/" method="post">
+<form method="POST" action="/name/">
+ <!--  обязательно укать а то django будет кидать ошибку -->
+  {% csrf_token %}
+   <label for="Name">Name</label> <input name ="name" type="text"> 
+	<br>
+	<label for="Surname">Surname</label> <input name ="surname" type="text"> 
+	<br>
+    <label for="Gender">Gender</label> 
+    <select name ='Choise'>
+        <option>M</option>
+        <option>W</option>
+    </select>
+    <br>
+<!--    для подгрузки формы из django -->
+<!--
     {% csrf_token %}
-	{{form.as_ul}}
-	<input type="submit" value="Отправить">
-</form>
-	
-<form action="/esp/" method="get">
-	<input type = "submit" value="Нажми меня">
+    {{ form }}
+-->
+    <input type="submit" value="Submit">
 </form>
 </body>
-	
 </html>
 
 

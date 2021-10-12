@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'page',
+    'site_form',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,7 @@ MIDDLEWARE = [
 
 ]
 
-ROOT_URLCONF = 'page.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
