@@ -38,20 +38,24 @@ class DB():
         # print("Соединение с PostgreSQL закрыто")
 
     def create_table(self, name_table):
-        self.cursor.execute(f'create table {name_table} (id integer primary key, name text);')
-        print(f'База данны {name_table} создана!')
+        self.cursor.execute(f'create table {name_table} (id serial primary key, name text, surname text, gender text);')
+        print(f'Таблица {name_table} создана!')
 
     def insert_table(self, form):
         self.cursor.execute(
             f'''insert into form (name,surname,gender) values ('{form.cleaned_data['name']}','{form.cleaned_data['surname']}','{form.cleaned_data['gender']}');''')
 
+    def insert_table_json(self, table, data):
+        self.cursor.execute(
+            f'''insert into {table} (name,surname,gender) values ('{data['name']}','{data['surname']}','{data['gender']}');''')
+
     def delete_line(self, name_table, column, value):
         self.cursor.execute(f'''delete from '{name_table}' where '{column}'='{value}';''')
 
-    def select_data(self):
-        self.cursor.execute(f'select * from form;')
-        data = self.cursor.fetchone()
-        return print(data)
+    def select_data(self,table):
+        self.cursor.execute(f'select * from {table};')
+        data = self.cursor.fetchall()
+        return print(*data)
 
 
 class NameForm(forms.Form):
@@ -109,13 +113,15 @@ def get_name1(request):
 
 def get_name_json(request):
     if request.method == 'POST':
-        data = loads(request.body)
-        del data['csrfmiddlewaretoken']
-        print(data)
+        jdata = loads(request.body)
+        del jdata['csrfmiddlewaretoken']
+        my_db.insert_table_json(table='data_json',data=jdata)
         data_list = []
-        for key, val in data.items():
+        for key, val in jdata.items():
             data_list.append(val)
-        print(data_list)
-        return HttpResponse("<h2>Hello</h2>")
+            try:
+                my_db.select_data(table='data_json')
+            except:
+                return None
     else:
         return render(request, r'D:\prog\project\templates\post_json.html')

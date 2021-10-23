@@ -12,9 +12,9 @@
 	<label for="Surname">Surname</label> <input name ="surname" type="text"> 
 	<br>
     <label for="Gender">Gender</label> 
-    <select name ='Choise'>
-        <option>M</option>
-        <option>W</option>
+    <select name ='gender'>
+        <option>Man</option>
+        <option>Woman</option>
     </select>
     <br>
     <input id = 'b' type="button" value="Submit">
@@ -29,7 +29,7 @@
             //console.log(results);
             var jresult = JSON.stringify(results);
 //            console.log(jresult);
-            var url = "http://127.0.0.1:8000/name_json/";
+            var url = "http://127.0.0.1:8000/site_form/name_json/";
             var request =new XMLHttpRequest();
             request.open("POST", url, true);
             request.setRequestHeader('Content-Type', 'application/json'); 
@@ -45,5 +45,15 @@
        
 </script>
     </form>
+<!--    <script>-->
+<!--    var t = document.querySelectorAll('*');-->
+<!--    var l = t.length-->
+<!--//    console.log(t);-->
+<!--//    console.log(typeof(t));-->
+<!--//    console.log(l);-->
+<!--    var y=0;    -->
+<!--    for (let i=0; i<l;i++){if (t[i].attributes != null) {y+=1};};-->
+<!--    alert('Количетсво тегов с аргументами =' + y);  -->
+<!--    </script>-->
 </body>
 </html>
