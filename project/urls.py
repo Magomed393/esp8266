@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+
+def istatic(args):
+    pass
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('site_form/', include('site_form.urls')),
     path('page/', include('page.urls')),
-
 ]

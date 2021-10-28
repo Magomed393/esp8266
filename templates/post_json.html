@@ -12,9 +12,9 @@
 	<label for="Surname">Surname</label> <input name ="surname" type="text"> 
 	<br>
     <label for="Gender">Gender</label> 
-    <select name ='Choise'>
-        <option>M</option>
-        <option>W</option>
+    <select name ='gender'>
+        <option>Man</option>
+        <option>Woman</option>
     </select>
     <br>
     <input id = 'b' type="button" value="Submit">
@@ -25,25 +25,46 @@
         $('#b').click(function() {
             var results = {};
             var str = $('form').serializeArray();
+            // возвращает массив объектов значений формы
             $.each(str, function(i,f){results[f.name] = f.value});
-            //console.log(results);
+//            итерируется по массиву создавая в массиве result ключ и значения используя данные из полученного массива [{name: 'name', value: 'Дмитрий'}]
+            console.log(results);
             var jresult = JSON.stringify(results);
+//            сериализует объект в строку json
 //            console.log(jresult);
-            var url = "http://127.0.0.1:8000/name_json/";
+            var url = "http://127.0.0.1:8000/site_form/name_json/";
             var request =new XMLHttpRequest();
             request.open("POST", url, true);
-            request.setRequestHeader('Content-Type', 'application/json'); 
+//            request.setRequestHeader('Content-Type', 'application/json'); 
+//            создается объект запроса
+//            указывается метод и mime type
 //            var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-////          console.log(csrftoken);
+//          console.log(csrftoken);
+//            извлекает токен из формы 
             cookiecsrftoken = document.cookie.match(/csrftoken=([\w-]+)/)
+//            извлекает массив из cookie по регулярному выражению
+            console.log(cookiecsrftoken);
             csrfCookie = cookiecsrftoken[1];
+//            извлекает токен из массива-cookie 
             console.log(csrfCookie);
             request.setRequestHeader("X-CSRFToken", csrfCookie);
+//            добавляю заголовок в запрос и присваиваю значение
             console.log(jresult)
             request.send(jresult);
+//            отправляю json строку
     });
        
 </script>
     </form>
+<!--    <script>-->
+<!--    var t = document.querySelectorAll('*');-->
+<!--    var l = t.length-->
+<!--//    console.log(t);-->
+<!--//    console.log(typeof(t));-->
+<!--//    console.log(l);-->
+<!--    var y=0;    -->
+<!--    for (let i=0; i<l;i++){if (t[i].attributes != null) {y+=1};};-->
+<!--    alert('Количетсво тегов с аргументами =' + y);  -->
+<!--    </script>-->
 </body>
 </html>
