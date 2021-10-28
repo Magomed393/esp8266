@@ -119,7 +119,14 @@ def get_name_json(request):
         data_list = []
         for key, val in jdata.items():
             data_list.append(val)
+<<<<<<< HEAD
             my_db.select_data(table='data_json')
         return HttpResponse("<h2>Hello</h2>")
+=======
+            try:
+                my_db.select_data(table='data_json')
+            except:
+                return None
+>>>>>>> 1c55e61924a841583e32f1dfa6ee505fb1b83f63
     else:
         return render(request, r'D:\prog\project\templates\post_json.html')
